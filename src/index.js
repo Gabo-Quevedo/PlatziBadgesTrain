@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/App'
 import 'bootstrap/dist/css/bootstrap.css'
 import './global.css'
 
@@ -10,10 +11,4 @@ import Badges from './pages/Badges'
 
 const container = document.getElementById('app')
 
-ReactDOM.render(<Badges 
-  // firstName="Gabriel"
-  // lastName="Quevedo"
-  // jobTitle="Frontend Developer"
-  // twitter="gabofunk"
-  // avatarUrl="http://www.gravatar.com/avatar?d=identicon"
-   />, container)
+ReactDOM.render(<App />, container)
