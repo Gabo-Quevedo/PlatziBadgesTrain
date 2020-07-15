@@ -448,6 +448,30 @@
       "jobTitle": "Frontend Developer",
       "twitter": "gabofunk",
       "id": "llAVZLE"
+    },
+    {
+      "firstName": "Alejando",
+      "lastName": "Almuna",
+      "email": "aalmuna@citimovil.cl",
+      "jobTitle": "Ingeniero en Soporte",
+      "twitter": "almunilla",
+      "id": "T5GCvCl"
+    },
+    {
+      "firstName": "Erick",
+      "lastName": "Choroman",
+      "email": "cherick@citymovil.cl",
+      "jobTitle": "Soporte Master",
+      "twitter": "choromaster",
+      "id": "yh6s2Al"
+    },
+    {
+      "firstName": "Mario",
+      "lastName": "Strambotik",
+      "email": "chikitito@gmail.com",
+      "jobTitle": "Ingeniero en Sistemas",
+      "twitter": "ohohho",
+      "id": "43z8Ttx"
     }
   ]
 }
