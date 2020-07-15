@@ -1,7 +1,8 @@
 import React from 'react'
-import header from '../images/badge-header.svg'
+import header from '../images/platziconf-logo.svg'
 import Badge from '../components/Badge'
 import BadgeForm from '../components/BadgeForm'
+import api from '../api'
 import './styles/BadgeNew.css'
 
 class BadgeNew extends React.Component{
@@ -22,11 +23,29 @@ class BadgeNew extends React.Component{
             }
         })
     }
+    handleSubmit = async e =>{
+        e.preventDefault()
+        this.setState({
+            loading: true,
+            error: null
+        })
+        try{
+            await api.badges.create(this.state.form)
+            this.setState({
+                loading: false
+            })
+        }catch(error){
+            this.setState({
+                loading: false,
+                error: error
+            })
+        }
+    }
     render(){
         return (
             <React.Fragment>
                 <div className="BadgeNew__hero">
-                    <img className="img-fluid" src={header} alt=""/>
+                    <img className="img-fluid BadgeNew__hero-image" src={header} alt=""/>
                 </div>
                 <div className="container">
                     <div className="row">
@@ -36,11 +55,16 @@ class BadgeNew extends React.Component{
                             lastName={this.state.form.lastName || 'lastName'}
                             jobTitle={this.state.form.jobTitle || 'jobTitle'}
                             twitter={this.state.form.twitter || 'twitter'}
+                            email={this.state.form.email || 'email'}
                             avatarUrl="http://www.gravatar.com/avatar?d=identicon"
                             />
                         </div>
                         <div className="col-6">
-                            <BadgeForm onChange={this.handleChange} formValues={this.state.form}/>
+                            <BadgeForm 
+                            onChange={this.handleChange} 
+                            formValues={this.state.form}
+                            onSubmit={this.handleSubmit}
+                            />
                         </div>
                     </div>
                 </div>
