@@ -27,11 +27,27 @@ class BadgesListItem extends React.Component {
   }
 }
 
-class BadgesList extends React.Component {
-  render() {
-    if (this.props.badges.length === 0) {
+function BadgesList (props) {
+  const badges = props.badges
+
+  const [query, setQuery] = React.useState('')
+
+  const fillterBadges = badges.filter(badge=>{
+    return `${badge.firstName} ${badge.lastName}`.toLowerCase().includes(query.toLowerCase())
+  })
+
+    if (fillterBadges.length === 0) {
       return (
         <div>
+          <div className="form-group">
+          <label>Filter Badges</label>
+          <input className="form-control" type="text"
+          value={query}
+          onChange={(e)=>{
+            setQuery(e.target.value)
+          }}
+          />
+        </div>
           <h3>No badges were found</h3>
           <Link className="btn btn-primary" to="/badges/new">
             Create new badge
@@ -42,8 +58,17 @@ class BadgesList extends React.Component {
 
     return (
       <div className="BadgesList">
+        <div className="form-group">
+          <label>Filter Badges</label>
+          <input className="form-control" type="text"
+          value={query}
+          onChange={(e)=>{
+            setQuery(e.target.value)
+          }}
+          />
+        </div>
         <ul className="list-unstyled">
-          {this.props.badges.map(badge => {
+          {fillterBadges.map(badge => {
             return (
               <li key={badge.id}>
                 <Link className="text-reset text-decoration-none" to={`/badges/${badge.id}`}>
@@ -56,6 +81,5 @@ class BadgesList extends React.Component {
       </div>
     );
   }
-}
 
 export default BadgesList;
