@@ -27,16 +27,29 @@ class BadgesListItem extends React.Component {
   }
 }
 
+function useSearchBadges(badges){
+  const [query, setQuery] = React.useState('')
+
+  const [filteredBadges, setFilteredBadges] = React.useState(badges)
+
+  React.useMemo(()=>{
+  const result = badges.filter(badge=>{
+  return `${badge.firstName} ${badge.lastName}`
+  .toLowerCase().
+  includes(query.toLowerCase())
+})
+setFilteredBadges(result)
+}, [badges, query])
+
+return {query, setQuery, filteredBadges}
+}
+
 function BadgesList (props) {
   const badges = props.badges
 
-  const [query, setQuery] = React.useState('')
+  const {query, setQuery, filteredBadges} = useSearchBadges(badges)
 
-  const fillterBadges = badges.filter(badge=>{
-    return `${badge.firstName} ${badge.lastName}`.toLowerCase().includes(query.toLowerCase())
-  })
-
-    if (fillterBadges.length === 0) {
+    if (filteredBadges.length === 0) {
       return (
         <div>
           <div className="form-group">
@@ -68,7 +81,7 @@ function BadgesList (props) {
           />
         </div>
         <ul className="list-unstyled">
-          {fillterBadges.map(badge => {
+          {filteredBadges.map(badge => {
             return (
               <li key={badge.id}>
                 <Link className="text-reset text-decoration-none" to={`/badges/${badge.id}`}>
